@@ -1,3 +1,4 @@
+/*header*/
 header {
   display: flex;
   flex-direction: row;
@@ -41,4 +42,37 @@ header {
 #random {
 }
 #filter {
+}
+
+/*card*/
+/*styling card */
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.card {
+  box-shadow: 0 4px 8px 0;
+  width: 20%;
+  border-radius: 1vw;
+  margin-left: 3vw;
+  margin-top: 8vw;
+  margin-right: 1.5vw;
+  font-size: 1.3vw;
+}
+.cardImage {
+  width: 100%;
+  border-radius: 2vh;
+}
+.container {
+  padding: 4px 9px;
+}
+
+@media (max-width: 560px) {
+  .cardContainer {
+  }
+  .card {
+    width: 40%;
+    margin-left: 6vw;
+  }
 }

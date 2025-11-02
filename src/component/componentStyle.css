@@ -35,7 +35,7 @@ header {
   background-color: #f0f0f0;
   color: #000;
   outline: none;
-  width: 33%;
+  width: 34%;
   height: 5vw;
   margin-left: 10.5vw;
 }
@@ -51,11 +51,6 @@ header {
 
 /*card*/
 /*styling card */
-.cardContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
 .card {
   box-shadow: 0 4px 8px 0;
   width: 20%;
@@ -65,12 +60,25 @@ header {
   margin-right: 1.5vw;
   font-size: 1.3vw;
 }
-.cardImage {
+.card > .cardImage {
   width: 100%;
   border-radius: 2vh;
 }
-.container {
-  padding: 4px 9px;
+
+.card > #cardName {
+  margin-left: 1.5vw;
+}
+#tagsCard {
+  display: flex;
+  flex-direction: row;
+}
+#tagsCard > .tags {
+  margin-left: 1.5vw;
+  background-color: #a72703;
+
+  border-radius: 1vw;
+
+  padding: 0.5vw 0.5vw 0.5vw 0.5vw;
 }
 
 @media (max-width: 600px) {

@@ -10,7 +10,7 @@ export default function App() {
   const [meals, setMeals] = useState([]);
   const [modalMeal, setModalMeal] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Ambil random awal
@@ -124,6 +124,8 @@ export default function App() {
                 key={meal.idMeal}
                 data={meal.strMeal}
                 image={meal.strMealThumb}
+                category={meal.strCategory}
+                area={meal.strArea}
                 onClick={() => handleCardClick(meal.idMeal)}
               />
             ))

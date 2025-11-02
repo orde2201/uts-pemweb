@@ -12,10 +12,9 @@ export default function Header({
   const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState([]);
   const [areas, setAreas] = useState([]);
-  const BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    // ambil kategori
     axios
       .get(`${BASE_URL}categories.php`)
       .then((res) => {
@@ -25,7 +24,6 @@ export default function Header({
       })
       .catch((err) => console.error("Error fetch categories:", err));
 
-    // ambil area (country)
     axios
       .get(`${BASE_URL}list.php?a=list`)
       .then((res) => {
@@ -36,64 +34,63 @@ export default function Header({
       .catch((err) => console.error("Error fetch areas:", err));
   }, []);
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
+  const handleSearchChange = (e) => setSearchTerm(e.target.value);
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     onSearch(searchTerm.trim());
   };
 
-  const handleCategoryChange = (e) => {
-    const cat = e.target.value;
-    onFilterCategory(cat);
-  };
-
-  const handleAreaChange = (e) => {
-    const area = e.target.value;
-    onFilterArea(area);
-  };
-
   return (
     <header className="header">
-      <button id="random" className="option" onClick={onRandomClick}>
-        Random
-      </button>
+      {/* ====== Nama Website ====== */}
+      <div className="logo">
+        🍳 <span>Dapoerku</span>
+      </div>
 
-      <select
-        className="option"
-        onChange={handleCategoryChange}
-        defaultValue=""
-      >
-        <option value="">Kategori</option>
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
-
-      <select className="option" onChange={handleAreaChange} defaultValue="">
-        <option value="">Country</option>
-        {areas.map((area) => (
-          <option key={area} value={area}>
-            {area}
-          </option>
-        ))}
-      </select>
-      <form onSubmit={handleSearchSubmit} id="search-input">
-        <input
-          type="text"
-          placeholder="Cari resep..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="option search-input"
-        />
-        <button type="submit" className="option">
-          Search
+      {/* ====== Tombol dan Filter ====== */}
+      <div className="header-controls">
+        <button id="random" className="option" onClick={onRandomClick}>
+          Random
         </button>
-      </form>
+
+        <select
+          className="option"
+          onChange={(e) => onFilterCategory(e.target.value)}
+        >
+          <option value="">Kategori</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="option"
+          onChange={(e) => onFilterArea(e.target.value)}
+        >
+          <option value="">Country</option>
+          {areas.map((area) => (
+            <option key={area} value={area}>
+              {area}
+            </option>
+          ))}
+        </select>
+
+        {/* ====== Pencarian ====== */}
+        <form onSubmit={handleSearchSubmit} className="search-container">
+          <input
+            type="text"
+            placeholder="Cari resep..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="search-input"
+          />
+          <button type="submit" className="search-btn" aria-label="Search">
+            🔍
+          </button>
+        </form>
+      </div>
     </header>
   );
 }
